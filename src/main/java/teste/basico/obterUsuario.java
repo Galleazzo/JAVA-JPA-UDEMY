@@ -6,24 +6,20 @@ import javax.persistence.Persistence;
 
 import modelo.basico.Pessoa;
 
-public class NovoUsuario {
-
+public class obterUsuario {
+	
 	public static void main(String[] args) {
-		
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-udemy");
 		EntityManager em = emf.createEntityManager();
 		
-		Pessoa novoUser = new Pessoa("Paulo", "paulo@gmail.com");
-		novoUser.setId(1L);
+		Pessoa usuario = em.find(Pessoa.class, 1L);
+		System.out.println(usuario.getNome());
 		
-		em.getTransaction().begin();
-		em.persist(novoUser);
-		em.getTransaction().commit();
 		
 		em.close();
-		emf.close();		
+		emf.close();
 		
 	}
-	
+
 }
